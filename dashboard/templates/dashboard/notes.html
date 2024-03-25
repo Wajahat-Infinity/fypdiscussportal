@@ -7,7 +7,7 @@
       <a href="#">
         <div class="card">
           <div class="card-header">{{note.title}}</div>
-          <div class="card-body">{{note.description}}</div>
+          <div class="card-body">{{note.description |slice:"0:100"}}</div>
           <div class="card-footer mt-auto">
             <a href="#"> <i class="fa fa-trash fa-2x"></i></a>
           </div>
@@ -22,6 +22,7 @@
 <div class="container">
   <form method="POST">
     <fieldset class="form-group">
+      {{form}}
       <legend class="border-bottom mb-4">Create Notes</legend>
     </fieldset>
     <div class="form-group">
