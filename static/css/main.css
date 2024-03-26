@@ -20,7 +20,8 @@ footer {
 }
 
 .navbar {
-  background-color: rgb(121, 30, 30) !important;
+  /* background-color: #7862f8; */
+  background-color: rgb(181, 115, 76) !important;
   /* background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%) !important; */
 }
 
@@ -30,7 +31,8 @@ footer {
 
 .card-header:hover {
   background: rgb(11, 22, 83) !important;
-  color: whitesmoke !important;
+  /* color: whitesmoke !important; */
+  color: #b5734c;
   transition: 0.1s ease-in;
 }
 
@@ -110,14 +112,14 @@ body {
 }
 
 body {
-  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.5));
+  background: linear-gradient(#1a1a1a, #b5734c);
   /*background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%)*/
   overflow-x: hidden;
   background-repeat: no-repeat;
 }
 
 .card-header {
-  background-color: rgb(133, 204, 231);
+  background-color: rgb(42, 134, 255);
 }
 
 .myimage {
@@ -165,7 +167,7 @@ footer .column a + a {
 }
 
 .content-section {
-  background: #ffffff;
+  background: #363636;
   padding: 10px 20px;
   border: 1px solid #dddddd;
   border-radius: 3px;
