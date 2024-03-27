@@ -27,6 +27,7 @@ footer {
 
 .card {
   box-shadow: 15px 15px 10px rgb(78, 77, 77);
+  /* background-color: rgb(181, 115, 76) !important; */
 }
 
 .card-header:hover {
@@ -51,8 +52,8 @@ a:hover {
 }
 
 .card-header {
-  color: black !important;
-  background: rgb(152, 214, 230) !important;
+  color: white !important;
+  background: rgb(61, 65, 66) !important;
   transition: 0.3s ease-in;
 }
 
@@ -167,7 +168,7 @@ footer .column a + a {
 }
 
 .content-section {
-  background: #363636;
+  background: #fff;
   padding: 10px 20px;
   border: 1px solid #dddddd;
   border-radius: 3px;
