@@ -64,4 +64,15 @@ def homework(request):
     }
 
     return render(request,'dashboard/homework.html',context)
+
+def update_homework(request,pk=None):
+    if homework.is_finfished == True:
+        homework.is_finished = False
+    else:
+        homework.is_finished =True
+    homework.save()
+    return redirect('homework')
+def delete_homework(request,pk=None):
+    Homework.objects.get(id=pk).delete()
+    return redirect("homework")
 # Create your views here.

@@ -24,7 +24,7 @@
         <td>{{homework.due}}</td>
 
         <td>
-          <a href="#">
+          <a href="{% url "update_homework" homework.id %}">
             <div class="form-check">
               {% if homework.is_finished == True %}
               <input
@@ -42,7 +42,7 @@
           </a>
         </td>
         <td>
-          <a href="#"><i class="fa fa-trash fa-2x"></i></a>
+          <a href="{% url "delete_homework" homework.id %}"><i class="fa fa-trash fa-2x"></i></a>
         </td>
       </tr>
       {% endfor %}
