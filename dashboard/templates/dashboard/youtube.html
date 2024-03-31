@@ -3,6 +3,8 @@
   <h2>Search Videos in Youtube</h2>
   <p>search videos and select any video to open in youtube</p>
   <form action="" method="post">
+    {% csrf_token %}
+    {{form}}
     <input class="btn btn-danger" type="submit" value="Submit" />
   </form>
   <br />
