@@ -117,9 +117,12 @@ def youtube(request):
         return render(request, 'dashboard/youtube.html', context)  # Render the template with an empty form
 
 def todo(request):
+    form=TodoForm()
     todo=Todo.objects.filter(user=request.user)
     context={
-        'todos':todo
+        'form':form,
+        'todos':todo,
+        
     }
 
     return render(request,'dashboard/todo.html',context)
