@@ -14,7 +14,7 @@ urlpatterns = [
     path('delete_todo/<int:pk>',views.delete_todo, name="delete_todo"),
     path('books',views.book, name="book"),
     path('dictionary',views.dictionary, name="dictionary"),
-
+    path('wiki',views.wiki, name="wiki"),
 
 
 

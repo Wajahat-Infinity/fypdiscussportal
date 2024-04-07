@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.views import generic
 from youtubesearchpython import VideosSearch
 import requests
+import wikipedia
 
 
 
@@ -242,3 +243,22 @@ def dictionary(request):
         'form': form
         }
     return render(request,'dashboard/dictionary.html',context)
+
+def wiki(request):
+    if request.method == 'POST':
+        text = request.POST['text']
+        form=DashboardForm(request.POST)
+        search=wikipedia.page(text)
+        context={
+            'form':form,
+            'title':search.title,
+            'link':search.url,
+            'details':search.summary
+        }
+        return render(request,'dashboard/wiki.html',context)
+    else:
+        form=DashboardForm()
+        context={
+             'form':form
+        }
+    return render(request,'dashboard/wiki.html',context)
