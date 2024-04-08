@@ -15,6 +15,8 @@ urlpatterns = [
     path('books',views.book, name="book"),
     path('dictionary',views.dictionary, name="dictionary"),
     path('wiki',views.wiki, name="wiki"),
+    path('blackbox',views.blackbox, name="blackbox"),
+
 
 
 

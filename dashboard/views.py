@@ -167,12 +167,7 @@ def delete_todo(request,pk=None):
     Todo.objects.get(id=pk).delete()
     return redirect("todo")
 
-# def book(request):
-#     form=DashboardForm()
-#     context={
-#         'form':form,
-#     }
-#     return render(request,'dashboard/books.html',context)
+
 
 def book(request):
     if request.method == "POST":
@@ -212,37 +207,39 @@ def book(request):
 def dictionary(request):
     if request.method == "POST":
         form = DashboardForm(request.POST)
-        text = request.POST['text']
-        url="https://api.dictionaryapi.dev/api/v2/entries/en_US/"+text
-        r=requests.get(url)
-        answer=r.json()
-        try:
-            phonetics=answer[0]['phonetics'][0]['text']
-            audio=answer[0]['phonetics'][0]['audio']
-            definition=answer[0]['meanings'][0]['definitions'][0]['definition']
-            example=answer[0]['meanings'][0]['example']
-            synonyms=answer[0]['meanings'][0]['synonyms']
-            context = {
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            url = f"https://api.dictionaryapi.dev/api/v2/entries/en_US/{text}"
+            try:
+                r = requests.get(url)
+                r.raise_for_status()  # Raise an exception for 4xx or 5xx status codes
+                answer = r.json()
+                phonetics = answer[0]['phonetics'][0]['text']
+                audio = answer[0]['phonetics'][0]['audio']
+                definition = answer[0]['meanings'][0]['definitions'][0]['definition']
+                example = answer[0]['meanings'][0].get('example', '')  # Example might not exist
+                synonyms = answer[0]['meanings'][0].get('synonyms', [])  # Synonyms might not exist
+                context = {
                     'form': form,
-                    'input':text,
-                    'phonetics':phonetics,
-                    'audio':audio,
-                    'definition':definition,
-                    'example':example,
-                    'synonyms':synonyms, 
-                     }
-        except:
-            context = {
-                'form': form,
-                'input':'',
-            }
-            return render(request,'dashboard/dictionary.html',context)
+                    'input': text,
+                    'phonetics': phonetics,
+                    'audio': audio,
+                    'definition': definition,
+                    'example': example,
+                    'synonyms': synonyms,
+                }
+
+                return render(request, 'dashboard/dictionary.html', context)
+            except requests.exceptions.RequestException as e:
+                error_message = f"Error fetching data from the API: {e}"
+                context = {'form': form, 'error_message': error_message}
+                return render(request, 'dashboard/dictionary.html', context)
     else:
-        form=DashboardForm()
-        context = {
-        'form': form
-        }
-    return render(request,'dashboard/dictionary.html',context)
+        form = DashboardForm()
+    
+    context = {'form': form}
+    return render(request, 'dashboard/dictionary.html', context)
+
 
 def wiki(request):
     if request.method == 'POST':
@@ -262,3 +259,28 @@ def wiki(request):
              'form':form
         }
     return render(request,'dashboard/wiki.html',context)
+
+
+
+def blackbox(request):
+    if request.method == 'POST':
+        form = DashboardForm(request.POST)
+        if form.is_valid():
+            query = form.cleaned_data['text']
+            # Make a request to the Black Box AI API
+            api_url = 'https://api.blackbox.com/search'
+            params = {'q': query}
+            headers = {'Authorization': 'Bearer YOUR_API_KEY'}  # Replace 'YOUR_API_KEY' with your actual API key
+            response = requests.get(api_url, params=params, headers=headers)
+            if response.status_code == 200:
+                result = response.json()
+                context = {'form': form, 'response': result}
+                return render(request, 'dashboard/blackbox.html', context)
+            else:
+                error_message = f"Error: {response.status_code}. Failed to retrieve data from Black Box AI API."
+                context = {'form': form, 'error_message': error_message}
+                return render(request, 'dashboard/blackbox.html', context)
+    else:
+        form = DashboardForm()
+        context = {'form': form}
+    return render(request, 'dashboard/blackbox.html', context)
