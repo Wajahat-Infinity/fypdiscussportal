@@ -262,25 +262,36 @@ def wiki(request):
 
 
 
+import requests
+
 def blackbox(request):
     if request.method == 'POST':
         form = DashboardForm(request.POST)
         if form.is_valid():
             query = form.cleaned_data['text']
-            # Make a request to the Black Box AI API
-            api_url = 'https://api.blackbox.com/search'
-            params = {'q': query}
-            headers = {'Authorization': 'Bearer YOUR_API_KEY'}  # Replace 'YOUR_API_KEY' with your actual API key
-            response = requests.get(api_url, params=params, headers=headers)
+            # Make a request to the black box API
+            url = f'https://api.blackbox.com/search?q={query}'
+            print(url)  # Print the URL to the console
+            response = requests.get(url)
+            # Check the status code of the response
             if response.status_code == 200:
+                # Process the response from the API
                 result = response.json()
-                context = {'form': form, 'response': result}
+                # Pass the result to the template context
+                context = {'form': form, 'result': result}
                 return render(request, 'dashboard/blackbox.html', context)
             else:
-                error_message = f"Error: {response.status_code}. Failed to retrieve data from Black Box AI API."
-                context = {'form': form, 'error_message': error_message}
+                # Handle the error
+                context = {'form': form, 'error': 'API request failed'}
                 return render(request, 'dashboard/blackbox.html', context)
     else:
         form = DashboardForm()
         context = {'form': form}
     return render(request, 'dashboard/blackbox.html', context)
+
+def register(request):
+    form =UserRegistrationForm()
+    context={
+        'form':form
+    }
+    return render(request,'dashboard/register.html',context)

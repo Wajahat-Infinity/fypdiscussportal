@@ -1,28 +1,34 @@
-{% extends 'dashboard/base.html' %} {% load static %} {% block content %}
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
 
-<section class="text-center container">
-  <h2>Search articles in Black Box AI</h2>
-  <p>Just enter the search query to obtain the results</p>
-  <b>Enter without any space</b>
-  <form action="" method="post">
-    {% csrf_token %} {{ form }}
-    <input class="btn btn-danger" type="submit" value="Submit" />
+<section class="container text-center">
+  <h2>Black Box AI</h2>
+  <p>Enter your query to interact with the Black Box AI.</p>
+  <form action="{% url 'blackbox' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input class="btn btn-primary" type="submit" value="Submit" />
   </form>
-  <br />
 
-  {% if response %}
-  <div class="container">
-    <div class="content-section p-0 mt-5">
-      <div class="custom-header">
-        <h2>{{ response.title }}</h2>
-        <h6>{{ response.link }}</h6>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="card">
+          <div class="card-body">
+            {% if result %}
+            <h5 class="card-title">Response</h5>
+            <p class="card-text">{{ result }}</p>
+            {% endif %}
+            {% if error %}
+            <p class="text-danger">{{ error }}</p>
+            {% endif %}
+          </div>
+        </div>
       </div>
-      <hr class="p-0 m-0" />
-      <p class="description m-5 p-5">{{ response.details }}</p>
-      <hr />
     </div>
   </div>
-  {% endif %}
+
 </section>
 
 {% endblock content %}
