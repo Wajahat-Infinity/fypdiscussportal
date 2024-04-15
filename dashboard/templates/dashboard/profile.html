@@ -1,5 +1,4 @@
-{% extends 'dashboard/base.html' %} {% load static %} {% load
-crispy_forms_tags%} {% block content %}
+{% extends 'dashboard/base.html' %} {% load static %}  {% block content %}
 <section class="text-center">
   {% if not todos_done %}
   <div class="container">
@@ -28,7 +27,8 @@ crispy_forms_tags%} {% block content %}
                   value=""
                   checked
                 />
-                {% else %}<input
+                {% else %}
+                <input
                   class="form-check-input"
                   type="checkbox"
                   value=""
@@ -54,7 +54,7 @@ crispy_forms_tags%} {% block content %}
     {% else %}
     <h3>All To dos are completed!!!!</h3>
     {% endif %}
-    <a href="#" class="btn btn-danger">To Do</a>
+    <a href="{% url "todo" %}" class="btn btn-danger">To Do</a>
     <br /><br />
     <h2>Due Homeworks</h2>
     {% if not homeworks_done %}
@@ -119,7 +119,7 @@ crispy_forms_tags%} {% block content %}
     <h3>All To homeworks are completed!!!!</h3>
     {% endif %}
 
-    <a href="#" class="btn btn-danger">Homeworks</a>
+    <a href="{% url "homework" %}" class="btn btn-danger">Homeworks</a>
   </div>
 </section>
 

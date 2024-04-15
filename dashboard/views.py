@@ -41,9 +41,9 @@ def homework(request):
                 if finished=='on':
                     finished=True
                 else:
-                    finished==False
+                    finished=False
             except:
-                finished==False
+                finished=False
             homework=Homework(
                 user=request.user,
                 subject=request.POST['subject'],
@@ -304,13 +304,13 @@ def register(request):
     }
     return render(request,'dashboard/register.html',context)
 def profile(request):
-    homeworks=Homework.objects.filter(is_finished=False,user=request.user)
-    todos=Todo.objects.filter(is_finished=False,user=request.user)
-    if len(homeworks)==0:
+    homework=Homework.objects.filter(is_finished=False,user=request.user)
+    todo=Todo.objects.filter(is_finished=False,user=request.user)
+    if len(homework)==0:
         homeworks_done=True
     else:
         homeworks_done=False
-    if len(todos)==0:
+    if len(todo)==0:
         todos_done=True
     else:
         todos_done=False
