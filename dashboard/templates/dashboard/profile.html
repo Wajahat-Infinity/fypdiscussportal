@@ -1,7 +1,8 @@
 {% extends 'dashboard/base.html' %} {% load static %}  {% block content %}
 <section class="text-center">
-  {% if not todos_done %}
   <div class="container">
+    {% if not todos_done %}
+
     <h2>Due ToDos</h2>
     <table class="table table-striped table-bordered table-hover table-dark">
       <thead>
@@ -52,12 +53,13 @@
       </tbody>
     </table>
     {% else %}
-    <h3>All To dos are completed!!!!</h3>
+      <h3>All To dos are completed!!!!</h3>
     {% endif %}
     <a href="{% url "todo" %}" class="btn btn-danger">To Do</a>
     <br /><br />
-    <h2>Due Homeworks</h2>
     {% if not homeworks_done %}
+
+    <h2>Due Homeworks</h2>
 
     <table class="table table-striped table-bordered table-hover table-dark">
       <thead>
