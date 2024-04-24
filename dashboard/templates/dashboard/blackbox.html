@@ -1,13 +1,14 @@
 {% extends 'dashboard/base.html' %}
 {% load static %}
 {% block content %}
+{% load crispy_forms_tags %}
 
 <section class="container text-center">
   <h2>Black Box AI</h2>
   <p>Enter your query to interact with the Black Box AI.</p>
   <form action="{% url 'blackbox' %}" method="post">
     {% csrf_token %}
-    {{ form }}
+    {{ form |crispy}}
     <input class="btn btn-primary" type="submit" value="Submit" />
   </form>
 

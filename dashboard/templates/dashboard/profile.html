@@ -1,4 +1,6 @@
 {% extends 'dashboard/base.html' %} {% load static %}  {% block content %}
+{% load crispy_forms_tags %}
+
 <section class="text-center">
   <div class="container">
     {% if not todos_done %}

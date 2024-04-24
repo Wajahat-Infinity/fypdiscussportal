@@ -1,12 +1,14 @@
 {% extends 'dashboard/base.html' %} 
 {% load static %} 
 {% block content %}
+{% load crispy_forms_tags %}
+
 <section class='text-center container'>
     <h2>Student Dictionary</h2>
     <p>Enter any word to get the phonetics, definition and an example for the word</p>
     <form action="" method="post">
         {% csrf_token %}
-        {{form}}
+        {{form |crispy}}
         <input class="btn btn-danger" type="submit" value="Submit">
     </form><br>
     <div class="content-section p-0 mt-5">

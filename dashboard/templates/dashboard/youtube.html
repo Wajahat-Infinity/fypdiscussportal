@@ -1,9 +1,11 @@
-{% extends 'dashboard/base.html' %} {% load static %} {% block content %}
+{% extends 'dashboard/base.html' %} {% load static %} 
+{% block content %} {% load crispy_forms_tags %}
+
 <section class="text-center container">
   <h2>Search Videos in Youtube</h2>
   <p>search videos and select any video to open in youtube</p>
   <form action="" method="post">
-    {% csrf_token %} {{form}}
+    {% csrf_token %} {{form|crispy}}
     <input class="btn btn-danger" type="submit" value="Submit" />
   </form>
   <br />
